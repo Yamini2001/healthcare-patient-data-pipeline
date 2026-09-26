@@ -1,0 +1,12 @@
+# Python environment & cache
+hbase_venv/
+__pycache__/
+*.pyc
+
+# Local logs & temp outputs
+/tmp/
+*.log
+
+# IDE files
+.vscode/
+.idea/

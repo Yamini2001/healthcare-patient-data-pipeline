@@ -1,0 +1,11 @@
+Visit_ID,Patient_ID,Doctor,Department,Diagnosis,Medicine,Amount,Visit_Date
+V001,P101,Dr_Ravi,Cardiology,Hypertension,Amlodipine,1500,2026-09-20
+V002,P102,Dr_Anita,Neurology,Migraine,Sumatriptan,1200,2026-09-21
+V003,P101,Dr_Ravi,Cardiology,Diabetes,Metformin,1800,2026-09-22
+V004,P103,Dr_Kiran,Orthopedics,Fracture,Calcium,5000,2026-09-22
+V005,P102,Dr_Anita,Neurology,Migraine,Sumatriptan,1300,2026-09-23
+V006,P104,Dr_Ravi,Cardiology,Hypertension,Amlodipine,2200,2026-09-23
+V007,P101,Dr_Ravi,Cardiology,Hypertension,Amlodipine,1700,2026-09-24
+V008,P103,Dr_Kiran,Orthopedics,Arthritis,Painkiller,3200,2026-09-24
+V009,P105,Dr_Anita,Neurology,Epilepsy,Levetiracetam,4500,2026-09-24
+V010,P104,Dr_Ravi,Cardiology,Diabetes,Metformin,2500,2026-09-25
