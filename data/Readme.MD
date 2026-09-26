@@ -34,23 +34,28 @@ jps
 start-hbase.sh
 
 Verify HBase processes (HMaster, HRegionServer)
+
 jps
 
 1. Start HBase Thrift Server (Required for Python HappyBase)
+   
 nohup hbase thrift start -p 9090 > /tmp/hbase-thrift.log 2>&1 &
 
 ## Step 1: Upload Raw Data to HDFS
 Create project directories in HDFS and upload the raw dataset.
 
 Create HDFS directories
+
 hdfs dfs -mkdir -p /healthcare/input
 hdfs dfs -mkdir -p /healthcare/mapreduce
 hdfs dfs -mkdir -p /healthcare/analytics
 
 Upload dataset to HDFS
+
 hdfs dfs -put -f data/healthcare_visits.csv /healthcare/input/
 
 Verify uploaded file
+
 hdfs dfs -ls /healthcare/input
 hdfs dfs -cat /healthcare/input/healthcare_visits.csv
 
@@ -67,6 +72,7 @@ Remove previous output directory if it exists
 hdfs dfs -rm -r -f /healthcare/mapreduce/department_output
 
 Run MapReduce job on Hadoop cluster
+
 hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
   -files mapreduce/mapper.py,mapreduce/reducer.py \
   -input /healthcare/input/healthcare_visits.csv \
@@ -75,25 +81,31 @@ hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
   -reducer "python3 reducer.py"
 
 Check MapReduce output in HDFS
+
 hdfs dfs -cat /healthcare/mapreduce/department_output/part-*
 
-Step 3: Run PySpark Patient Analytics
+### Step 3: Run PySpark Patient Analytics
+
 Execute PySpark analytics to aggregate total visits and billing amounts per patient.
 
-Run PySpark job
+### Run PySpark job
+
 spark-submit pyspark/patient_analytics.py
 
 Check PySpark output in HDFS
+
 hdfs dfs -ls /healthcare/analytics/patient_analytics
 hdfs dfs -cat /healthcare/analytics/patient_analytics/part-*
 
 Merge PySpark results to local file system for HBase loading
+
 hdfs dfs -getmerge /healthcare/analytics/patient_analytics /tmp/patient_analytics.csv
 
-Step 4: Create HBase Tables
+### Step 4: Create HBase Tables
 Create required NoSQL tables and column families using the HBase shell.
 
 ## Open HBase shell
+
 hbase shell
 
 Inside HBase shell, run:
@@ -111,6 +123,7 @@ Exit HBase shell
 exit
 
 ## Step 5: Automated Ingestion into HBase
+
 Run Python scripts to test Thrift connection and load processed datasets into HBase tables.
 
 1. Test HBase Thrift Connection
@@ -119,7 +132,8 @@ python3 loader/hbase_test.py
 1. Automatically load data into HBase tables
 python3 loader/load_to_hbase.py
 
-Step 6: Query and Verify HBase Data
+### Step 6: Query and Verify HBase Data
+
 Verify data storage and sub-second retrieval using row-key queries in the HBase shell.
 
 Open HBase shell
