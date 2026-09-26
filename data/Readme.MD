@@ -4,7 +4,7 @@ A Big Data processing pipeline built with Hadoop (HDFS, MapReduce), PySpark, and
 
 ---
 
-## Directory Structure
+Directory Structure
 
 ```text
 healthcare-hbase-project/
